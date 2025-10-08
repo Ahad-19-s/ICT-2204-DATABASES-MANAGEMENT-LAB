@@ -1,0 +1,360 @@
+mysql> show databases
+    -> create database university ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create database university' at line 2
+mysql> use university ;
+Database changed
+mysql> 
+mysql> 
+mysql> 
+mysql> CREATE TABLE department (
+    ->     dept_name VARCHAR(20),
+    ->     building VARCHAR(15),
+    ->     budget NUMERIC(12 , 2 ) CHECK (budget > 0)
+    -> );
+ERROR 1050 (42S01): Table 'department' already exists
+mysql> 
+mysql> INSERT INTO department (dept_name, building, budget)  
+    -> VALUES  
+    ->     ('CSE', 'CSE and GEO', 500000.00),  
+    ->     ('IIT', 'IIT and Math', 400000.00),  
+    ->     ('Statistics', 'IIT and Math', 600000.00),  
+    ->     ('Physics', 'Physics', 300000.00);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> SELECT* FROM department;
++------------+--------------+-----------+
+| dept_name  | building     | budget    |
++------------+--------------+-----------+
+| CSE        | CSE and GEO  | 500000.00 |
+| IIT        | IIT and Math | 400000.00 |
+| Statistics | IIT and Math | 600000.00 |
+| Physics    | Physics      | 300000.00 |
+| CSE        | CSE and GEO  | 500000.00 |
+| IIT        | IIT and Math | 400000.00 |
+| Statistics | IIT and Math | 600000.00 |
+| Physics    | Physics      | 300000.00 |
++------------+--------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> CREATE TABLE instructor (
+    ->     ID VARCHAR(20),
+    ->     name VARCHAR(20) NOT NULL,
+    ->     dept_name VARCHAR(20),
+    ->     salary NUMERIC(8 , 2 )
+    ->    
+    ->    
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> INSERT INTO instructor (ID, name, dept_name, salary)  
+    -> VALUES  
+    ->     ('CSE-1201', 'Rashidul Hasan', 'CSE', 92000),  
+    ->     ('IIT-1202', 'Omar Faruk', 'IIT', 60000),  
+    ->     ('Math-1203', 'Supto Kundu', 'Math', 110000),  
+    ->     ('Physics-1204', 'Humaon Kabir', 'Physics', 80000),  
+    ->     ('CSE-1205', 'Naim Hossain', 'CSE', 45000);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>     
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> CREATE TABLE student (
+    ->     ID          VARCHAR(5), 
+    ->     name        VARCHAR(20) NOT NULL, 
+    ->     dept_name   VARCHAR(20), 
+    ->     tot_cred    NUMERIC(3,0) CHECK (tot_cred >= 0)
+    ->    
+    ->    
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> INSERT INTO student (ID, name, dept_name, tot_cred)  
+    -> VALUES  
+    ->     ('1099', 'Milon', 'CSE', 180),  
+    ->     ('1029', 'Omar', 'IIT', 170),  
+    ->     ('1030', 'Supto', 'Math', 180),  
+    ->     ('1033', 'Kabir', 'Physics', 180),  
+    ->     ('1043', 'Naim', 'CSE', 190);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>     
+mysql> select* from student;
++------+-------+-----------+----------+
+| ID   | name  | dept_name | tot_cred |
++------+-------+-----------+----------+
+| 1099 | Milon | CSE       |      180 |
+| 1029 | Omar  | IIT       |      170 |
+| 1030 | Supto | Math      |      180 |
+| 1033 | Kabir | Physics   |      180 |
+| 1043 | Naim  | CSE       |      190 |
++------+-------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> set sql_safe_updates = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update student
+    -> set dept_name='Statistics' where id= '1099';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from student;
++------+-------+------------+----------+
+| ID   | name  | dept_name  | tot_cred |
++------+-------+------------+----------+
+| 1099 | Milon | Statistics |      180 |
+| 1029 | Omar  | IIT        |      170 |
+| 1030 | Supto | Math       |      180 |
+| 1033 | Kabir | Physics    |      180 |
+| 1043 | Naim  | CSE        |      190 |
++------+-------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> alter table department
+    -> add column feculty_name varchar(20) after building;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> select* from department;
++------------+--------------+--------------+-----------+
+| dept_name  | building     | feculty_name | budget    |
++------------+--------------+--------------+-----------+
+| CSE        | CSE and GEO  | NULL         | 500000.00 |
+| IIT        | IIT and Math | NULL         | 400000.00 |
+| Statistics | IIT and Math | NULL         | 600000.00 |
+| Physics    | Physics      | NULL         | 300000.00 |
+| CSE        | CSE and GEO  | NULL         | 500000.00 |
+| IIT        | IIT and Math | NULL         | 400000.00 |
+| Statistics | IIT and Math | NULL         | 600000.00 |
+| Physics    | Physics      | NULL         | 300000.00 |
++------------+--------------+--------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> delete  from department
+    -> where dept_name='Statistics';
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> select name from instructor
+    -> where salary > 90000 and salary <=100000 order by name desc;
++----------------+
+| name           |
++----------------+
+| Rashidul Hasan |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| university         |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> create database iit
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| iit                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| university         |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use iit14
+ERROR 1049 (42000): Unknown database 'iit14'
+mysql> use iit
+Database changed
+mysql> CREATE TABLE NAHID;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> CREATE TABLE STUDENT (NAME VARCHAR(50),ROLL INT PRIMARY KRY);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'KRY)' at line 1
+mysql> CREATE TABLE (
+    -> STUDENT
+    -> (STUDENT_ID INT, STUDENT_NAME VARCHAR(70),SESSION VARCHAR(10),CGPA FLOAT(5,2),GENDER VARCHAR(7),MOBILEPHONE VARCHAR(15),EMAIL VARCHAR(100),DOB DATE);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(
+STUDENT
+(STUDENT_ID INT, STUDENT_NAME VARCHAR(70),SESSION VARCHAR(10),CGPA FLO' at line 1
+mysql>  CREATE TABLE STUDENT (STUDENT_ID INT, STUDENT_NAME VARCHAR(70),SESSION VARCHAR(10),CGPA FLOAT(5,2),GENDER VARCHAR(7),MOBILEPHONE VARCHAR(15),EMAIL VARCHAR(100),DOB DATE);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_iit |
++---------------+
+| student       |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> DESC STUDENT
+    -> ;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| STUDENT_ID   | int          | YES  |     | NULL    |       |
+| STUDENT_NAME | varchar(70)  | YES  |     | NULL    |       |
+| SESSION      | varchar(10)  | YES  |     | NULL    |       |
+| CGPA         | float(5,2)   | YES  |     | NULL    |       |
+| GENDER       | varchar(7)   | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100) | YES  |     | NULL    |       |
+| DOB          | date         | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> create table cust(cust_id int not null,custname varchar(89));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop table cust
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table football;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table footbal;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql>  create table football(name int not null,Age int primary key);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop table football
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE departments (
+    ->     department_id INT,
+    ->     department_name VARCHAR(100) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO departments (department_id, department_name)
+    -> VALUES 
+    -> (1, 'Computer Science'),
+    -> (2, 'Business Administration');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE students (
+    ->     student_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     email VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table x( )
+    -> student_id INT,
+    ->     course_id INT,
+    ->     enrollment_date DATE,
+    ->     PRIMARY KEY (student_id, course_id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+student_id INT,
+    course_id INT,
+    enrollment_date DATE,
+    PRIMARY KEY (' at line 1
+mysql> create table a(
+    -> student_id int,
+    -> course_id int,
+    -> date_time date,
+    -> primary key(student_id,course_id)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE departments (
+    ->     department_id INT,
+    ->     department_name VARCHAR(100),
+    ->     CONSTRAINT pk_department PRIMARY KEY (department_id)
+    -> );
+ERROR 1050 (42S01): Table 'departments' already exists
+mysql> CREATE TABLE departments(
+    -> department_id INT,
+    ->   department_name VARCHAR(100),
+    ->   CONSTRAINT pk_department PRIMARY KEY (student_id)
+    -> );
+ERROR 1050 (42S01): Table 'departments' already exists
+mysql>  CREATE TABLE departments(
+    ->  department_id INT,
+    ->   department_name VARCHAR(100),
+    ->  CONSTRAINT hello PRIMARY KEY (student_id)
+    -> );
+ERROR 1050 (42S01): Table 'departments' already exists
+mysql> drop tables 
+    -> ERROR 1050 (42S01): Table 'departments
+    '> drop table departments;
+    '>  CREATE TABLE departments(
+    '>     -> department_id INT,
+    '>     ->   department_name VARCHAR(100),
+    '>     ->   CONSTRAINT pk_department PRIMARY KEY (student_id)
+    '>     -> );
+    '> 
+    '> mysql
+    '> DROP TABLE departments;
+    '> CREATE TABLE departments(
+    '>     department_id INT,
+    '>     department_name VARCHAR(100),
+    '>     CONSTRAINT pk_department PRIMARY KEY (department_id)
+    '> );
+    '> 
+    '> 
+    '> Terminal close -- exit!
