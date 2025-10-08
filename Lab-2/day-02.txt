@@ -1,0 +1,200 @@
+mysql> CREATE DATABASE IIT14;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> USE IIT14;
+Database changed
+mysql> CREATE TABLE STUDENT(
+    -> STUDENT_ID INT,
+    -> STUDENT_NAME VARCHAR(20),
+    -> CGPA FLOAT(5,2),
+    -> GENDER VARCHAR(7),
+    ->   MOBILEPHONE VARCHAR(15),
+    ->   EMAIL VARCHAR(100),
+    ->   DOB DATE
+    -> );
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+
+mysql> SHOW DATABESES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABESES' at line 1
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+12 rows in set (0.03 sec)
+
+mysql> INSERT INTO STUDENT (STUDENT_ID, STUDENT_NAME, SESSION, CGPA, GENDER, MOBILEPHONE, EMAIL, DOB) 
+    -> VALUES 
+    -> (1, 'Ahad Ahmed', '2021', 3.75, 'Male', '01712345678', 'ahad@example.com', '2000-05-12'),
+    -> (2, 'Sara Khan', '2021', 3.90, 'Female', '01898765432', 'sara@example.com', '2001-08-23'),
+    -> (3, 'Rasel Hossain', '2020', 3.50, 'Male', '01911223344', 'rasel@example.com', '1999-11-05'),
+    -> (4, 'Nabila Akter', '2020', 3.85, 'Female', '01655667788', 'nabila@example.com', '2000-03-15'),
+    -> (5, 'Fahim Rahman', '2022', 3.65, 'Male', '01566778899', 'fahim@example.com', '2002-01-20');
+ERROR 1054 (42S22): Unknown column 'SESSION' in 'field list'
+mysql> INSERT INTO STUDENT (STUDENT_ID, STUDENT_NAME, CGPA, GENDER, MOBILEPHONE, EMAIL, DOB)
+    -> VALUES
+    -> (1, 'Ahad Ahmed', 3.75, 'Male', '01712345678', 'ahad@example.com', '2000-05-12'),
+    -> (2, 'Sara Khan', 3.90, 'Female', '01898765432', 'sara@example.com', '2001-08-23'),
+    -> (3, 'Rasel Hossain', 3.50, 'Male', '01911223344', 'rasel@example.com', '1999-11-05');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_iit14 |
++-----------------+
+| student         |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> CREATE TABLE COMPOSITE_KEY(
+    -> student_id INT,
+    ->   course_id INT,
+    ->   date_time DATE,
+    ->   PRIMARY KEY(student_id, course_id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_iit14 |
++-----------------+
+| composite_key   |
+| student         |
++-----------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO COMPOSITE_KEY(student_id, course_id, date_time) VALUES
+    -> (1, 101, '2025-01-10'),
+    -> (1, 102, '2025-02-15'),
+    -> (2, 101, '2025-01-12'),
+    -> (3, 103, '2025-03-05'),
+    -> (2, 104, '2025-04-20');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE departments(
+    ->     department_id INT,
+    ->     department_name VARCHAR(100),
+    ->     CONSTRAINT pk_department PRIMARY KEY(department_id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO departments (department_id, department_name)
+    -> VALUES (1, 'Computer Science'), (2, 'Business Administration');
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE football(name INT NOT NULL, Age INT PRIMARY KEY);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+12 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_iit14 |
++-----------------+
+| composite_key   |
+| departments     |
+| football        |
+| student         |
++-----------------+
+4 rows in set (0.00 sec)
+
+mysql> DROP TABLE FOOTBALL;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_iit14 |
++-----------------+
+| composite_key   |
+| departments     |
+| student         |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> DESC STUDENT;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| STUDENT_ID   | int          | YES  |     | NULL    |       |
+| STUDENT_NAME | varchar(20)  | YES  |     | NULL    |       |
+| CGPA         | float(5,2)   | YES  |     | NULL    |       |
+| GENDER       | varchar(7)   | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100) | YES  |     | NULL    |       |
+| DOB          | date         | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> DESC departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | int          | NO   | PRI | NULL    |       |
+| department_name | varchar(100) | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++------------+---------------+------+--------+-------------+-------------------+------------+
+| STUDENT_ID | STUDENT_NAME  | CGPA | GENDER | MOBILEPHONE | EMAIL             | DOB        |
++------------+---------------+------+--------+-------------+-------------------+------------+
+|          1 | Ahad Ahmed    | 3.75 | Male   | 01712345678 | ahad@example.com  | 2000-05-12 |
+|          2 | Sara Khan     | 3.90 | Female | 01898765432 | sara@example.com  | 2001-08-23 |
+|          3 | Rasel Hossain | 3.50 | Male   | 01911223344 | rasel@example.com | 1999-11-05 |
++------------+---------------+------+--------+-------------+-------------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM  departments;
++---------------+-------------------------+
+| department_id | department_name         |
++---------------+-------------------------+
+|             1 | Computer Science        |
+|             2 | Business Administration |
++---------------+-------------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM composite_key;
++------------+-----------+------------+
+| student_id | course_id | date_time  |
++------------+-----------+------------+
+|          1 |       101 | 2025-01-10 |
+|          1 |       102 | 2025-02-15 |
+|          2 |       101 | 2025-01-12 |
+|          2 |       104 | 2025-04-20 |
+|          3 |       103 | 2025-03-05 |
++------------+-----------+------------+
+5 rows in set (0.00 sec)
+
