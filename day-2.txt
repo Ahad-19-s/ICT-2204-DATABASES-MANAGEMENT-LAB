@@ -248,3 +248,113 @@ mysql> SHOW TABLES;
 +---------------+
 1 row in set (0.00 sec)
 
+mysql> DESC STUDENT
+    -> ;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| STUDENT_ID   | int          | YES  |     | NULL    |       |
+| STUDENT_NAME | varchar(70)  | YES  |     | NULL    |       |
+| SESSION      | varchar(10)  | YES  |     | NULL    |       |
+| CGPA         | float(5,2)   | YES  |     | NULL    |       |
+| GENDER       | varchar(7)   | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100) | YES  |     | NULL    |       |
+| DOB          | date         | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> create table cust(cust_id int not null,custname varchar(89));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop table cust
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table football;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table footbal;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql>  create table football(name int not null,Age int primary key);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop table football
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE departments (
+    ->     department_id INT,
+    ->     department_name VARCHAR(100) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO departments (department_id, department_name)
+    -> VALUES 
+    -> (1, 'Computer Science'),
+    -> (2, 'Business Administration');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE students (
+    ->     student_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     email VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table x( )
+    -> student_id INT,
+    ->     course_id INT,
+    ->     enrollment_date DATE,
+    ->     PRIMARY KEY (student_id, course_id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+student_id INT,
+    course_id INT,
+    enrollment_date DATE,
+    PRIMARY KEY (' at line 1
+mysql> create table a(
+    -> student_id int,
+    -> course_id int,
+    -> date_time date,
+    -> primary key(student_id,course_id)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE departments (
+    ->     department_id INT,
+    ->     department_name VARCHAR(100),
+    ->     CONSTRAINT pk_department PRIMARY KEY (department_id)
+    -> );
+ERROR 1050 (42S01): Table 'departments' already exists
+mysql> CREATE TABLE departments(
+    -> department_id INT,
+    ->   department_name VARCHAR(100),
+    ->   CONSTRAINT pk_department PRIMARY KEY (student_id)
+    -> );
+ERROR 1050 (42S01): Table 'departments' already exists
+mysql>  CREATE TABLE departments(
+    ->  department_id INT,
+    ->   department_name VARCHAR(100),
+    ->  CONSTRAINT hello PRIMARY KEY (student_id)
+    -> );
+ERROR 1050 (42S01): Table 'departments' already exists
+mysql> drop tables 
+    -> ERROR 1050 (42S01): Table 'departments
+    '> drop table departments;
+    '>  CREATE TABLE departments(
+    '>     -> department_id INT,
+    '>     ->   department_name VARCHAR(100),
+    '>     ->   CONSTRAINT pk_department PRIMARY KEY (student_id)
+    '>     -> );
+    '> 
+    '> mysql
+    '> DROP TABLE departments;
+    '> CREATE TABLE departments(
+    '>     department_id INT,
+    '>     department_name VARCHAR(100),
+    '>     CONSTRAINT pk_department PRIMARY KEY (department_id)
+    '> );
+    '> 
+    '> 
+    '> Terminal close -- exit!
