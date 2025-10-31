@@ -1,0 +1,11 @@
+ID  Name                Country     Age (2025)   Goals         Assists        TeamTitles        IdvTitles   Ballon d'Or
+1   Messi               Argentina    38           891            399              40+            50+        8 Ballon d'Or  
+2   Ronaldo             Portugal     40           950            259              35+            40+        5 Ballon d'Or  
+3   Neymar              Brazil       33           440+           240+             20+            10+        2 FIFA FIFPro  
+4   Mbappé              France       26           250+           85+              15+            8+         1 FIFA FIFPro  
+5   Haaland             Norway       25           200+           35+              5+             2+         1 FIFA FIFPro  
+6   Kante               France       32           30+            40+              8+             5+         1 Ballon d'Or  
+7   Lewandowski         Poland       35           700+           100+             20+            15+        2 FIFA FIFPro  
+8   Bruyne              Belgium      32           150+           160+             12+            10+        0 Ballon d'Or 
+9   Salah               Egypt        31           350+           80+              6+             8+         1 FIFA FIFPro  
+10  Modric              Croatia      37           150+           110+             10+            9+         1 Ballon d'Or  
