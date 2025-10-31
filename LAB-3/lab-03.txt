@@ -1,0 +1,323 @@
+mysql> use iit
+Database changed
+mysql> show tables
+    -> ;
++---------------+
+| Tables_in_iit |
++---------------+
+| a             |
+| depart        |
+| departments   |
+| student       |
+| students      |
++---------------+
+5 rows in set (0.00 sec)
+
+mysql> create database xyz_company;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use xyz_company;
+Database changed
+mysql> create table usertype(
+    -> UI_ID INT ,
+    -> U_TYPE VARCHAR(20),
+    -> PRIMARY KEY(dept_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> create table usertype(
+    -> UI_ID INT 
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> e changed
+    -> mysql> create table usertype(
+    ->     -> UI_ID INT ,
+    ->     -> U_TYPE VARCHAR(20),
+    ->     -> PRIMARY KEY(UI_ID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'e changed
+mysql> create table usertype(
+    -> UI_ID INT ,
+    -> U_TYPE VARCHAR' at line 1
+mysql> CREATE TABLE usertype (
+    ->     UI_ID INT,
+    ->     U_TYPE VARCHAR(20),
+    ->     PRIMARY KEY (UI_ID)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> CREATE TABLE USER(
+    -> U_ID INT,
+    -> USER_NAME VARCHAR(50),
+    -> DOB DATE,
+    -> FOREIGN KEY(UI_ID) REFERENCES(UI_ID)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(UI_ID)
+)' at line 5
+mysql> CREATE TABLE USER (
+    ->     U_ID INT,
+    ->     USER_NAME VARCHAR(50),
+    ->     DOB DATE,
+    ->     UI_ID INT,
+    ->     FOREIGN KEY (UI_ID) REFERENCES usertype(UI_ID)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW TABLES;
++-----------------------+
+| Tables_in_xyz_company |
++-----------------------+
+| user                  |
+| usertype              |
++-----------------------+
+2 rows in set (0.00 sec)
+
+mysql> DESC XYZ_COMPANY
+    -> ;
+ERROR 1146 (42S02): Table 'xyz_company.xyz_company' doesn't exist
+mysql> INSERT INTO USERTYPE (UI_ID,U_TYPE) VALUES (1,'ADMIN);
+    '> ^C
+mysql>  INSERT INTO USERTYPE (UI_ID,U_TYPE) VALUES (1,'ADMIN');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO USERTYPE (UI_ID,U_TYPE) VALUES (2,'STUDENT');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO USERTYPE (UI_ID,U_TYPE) VALUES (2,'TEACHER');
+ERROR 1062 (23000): Duplicate entry '2' for key 'usertype.PRIMARY'
+mysql>  INSERT INTO USERTYPE (UI_ID,U_TYPE) VALUES (3,'TEACHER');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO USERTYPE (UI_ID,U_TYPE) VALUES (3,'STAFT');
+ERROR 1062 (23000): Duplicate entry '3' for key 'usertype.PRIMARY'
+mysql>  INSERT INTO USERTYPE (UI_ID,U_TYPE) VALUES (4,'STAFT');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO USER (U_ID,USER_NAME,DOB,UI_ID) VALUES (101,'NAHID','2020-01-01',1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  INSERT INTO USER (U_ID,USER_NAME,DOB,UI_ID) VALUES (101,'NAHID','2020-01-01',5);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`xyz_company`.`user`, CONSTRAINT `user_ibfk_1` FOREIGN KEY (`UI_ID`) REFERENCES `usertype` (`UI_ID`))
+mysql> CREATE TABLE USER (
+    ->     ->     U_ID INT,
+    ->     ->     USER_NAME VARCHAR(50),
+    ->     ->     DOB DATE,
+    ->     ->     UI_ID INT,
+    ->     ->     FOREIGN KEY (UI_ID) REFERENCES usertype(UI_ID)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->     U_ID INT,
+    ->     USER_NAME VARCHAR(50),
+    ->     DOB DATE,
+    ->  ' at line 2
+mysql>  CREATE TABLE USER_2(
+    ->   U_ID INT,
+    ->  USER_NAME VARCHAR(50),
+    ->  DOB DATE,
+    ->   UI_ID INT,
+    -> CONSTRANT AHAD FOREIGN KEY (UI_ID) REFERENCES usertype(UI_ID) 
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AHAD FOREIGN KEY (UI_ID) REFERENCES usertype(UI_ID) 
+)' at line 6
+mysql> CREATE TABLE USER_2 (
+    ->     U_ID INT PRIMARY KEY,
+    ->     USER_NAME VARCHAR(50),
+    ->     DOB DATE,
+    ->     UI_ID INT,
+    ->     CONSTRAINT AHAD FOREIGN KEY (UI_ID) REFERENCES usertype(UI_ID)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CREATE TABLE SG(
+    -> G_ID INT,
+    -> G_TYPE VARCHAR(20),
+    -> PRIMARY KEY( G_ID INT)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INT)
+)' at line 4
+mysql> CREATE TABLE SG (
+    ->     G_ID INT,
+    ->     G_TYPE VARCHAR(20),
+    ->     PRIMARY KEY (G_ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO SG(G_ID,G_TYPE) VALUES (1,'MALE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO SG(G_ID,G_TYPE) VALUES (2,'MALE');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO SG(G_ID,G_TYPE) VALUES (2,'FEMALE');
+ERROR 1062 (23000): Duplicate entry '2' for key 'sg.PRIMARY'
+mysql> INSERT INTO SG(G_ID,G_TYPE) VALUES (3,'FEMALE');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE TABLE S_INFO(
+    -> S_ID INT,
+    -> USER_NAME VARCHAR(20),
+    -> DOB DATE,
+    -> G_ID INT,
+    -> FOREIGN KEY (G_ID) REFERENCES SG(G_ID)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>  INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_I9) VALUES 
+    ->  (101,'NAHID','2020-01-01',1);
+ERROR 1054 (42S22): Unknown column 'G_I9' in 'field list'
+mysql> INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES
+    ->   (101,'NAHID','2020-01-01',1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE TABLE TES1(
+    -> TEST_ID INT,
+    -> TEST_NAME VARCHAR,
+    -> AGE INT,
+    -> CHEAK(AGE>=18)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+AGE INT,
+CHEAK(AGE>=18)
+)' at line 3
+mysql> CREATE TABLE TES1 (
+    ->     TEST_ID INT,
+    ->     TEST_NAME VARCHAR(50),
+    ->     AGE INT,
+    ->     CHECK (AGE >= 18)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO TES1 (TEST_ID,TEST_NAME,AGE) VALUES (1,'SHAON',22);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  INSERT INTO TES1 (TEST_ID,TEST_NAME,AGE) VALUES (1,'HABIB',2);
+ERROR 3819 (HY000): Check constraint 'tes1_chk_1' is violated.
+mysql>   CREATE TABLE TES2 (
+    -> TEST_ID INT,
+    -> TEST_NAME VARCHAR(50) DEFAULT 'TUHIN',
+    ->   CHECK (AGE <=18)
+    -> );
+ERROR 3820 (HY000): Check constraint 'tes2_chk_1' refers to non-existing column 'AGE'.
+mysql>   CREATE TABLE TES2 (
+    ->     -> TEST_ID INT,
+    ->     -> TEST_NAME VARCHAR(50) DEFAULT 'TUHIN',
+    -> AGE INT,
+    ->   CHECK (AGE <=18)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> TEST_ID INT,
+    -> TEST_NAME VARCHAR(50) DEFAULT 'TUHIN',
+AGE INT,
+  CHECK (' at line 2
+mysql> CREATE TABLE TES3 (
+    ->     TEST_ID INT,
+    ->     TEST_NAME VARCHAR(50),
+    ->     AGE INT,
+    ->     CREATED_DATE DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 5
+mysql> CREATE TABLE TES3 (
+    ->     TEST_ID INT,
+    ->     TEST_NAME VARCHAR(50),
+    ->     AGE INT,
+    ->     CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE TEST2 ( 
+    ->     TEST_ID INT,
+    ->     TEST_NAME VARCHAR(50) DEFAULT 'TUHIN',
+    ->     AGE INT,
+    ->     CHECK (AGE <= 18)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DROP TABLE TEST2;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE TEST2 (
+    ->  TEST_ID INT,
+    -> TEST_NAME VARCHAR(50)
+    -> ^C
+mysql>  CREATE TABLE TEST2 (
+    ->     ->  TEST_ID INT,
+    ->     -> TEST_NAME VARCHAR(50),
+    ->  AGE INT,
+    ->  CHECK (AGE <= 18)
+    -> ^C
+mysql>  CREATE TABLE TEST2 (
+    ->     ->     ->  TEST_ID INT,
+    ->     ->     -> TEST_NAME VARCHAR(50),
+    ->     ->  AGE INT,
+    ->     ->  CHECK (AGE <= 18),
+    -> TEST_DATE DATETIME DEFAULT CURRENT_TIMESTAMP
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->     ->  TEST_ID INT,
+    ->     -> TEST_NAME VARCHAR(50),
+    ->  AGE INT,
+  ' at line 2
+mysql> CREATE TABLE TEST2 (
+    ->     TEST_ID INT,
+    ->     TEST_NAME VARCHAR(50),
+    ->     AGE INT,
+    ->     CHECK (AGE <= 18),
+    ->     TEST_DATE DATETIME DEFAULT CURRENT_TIMESTAMP
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO TABLE TEST2(TEST_ID,TEST_NAME,AGE) VALUES (101,'MAHI',10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE TEST2(TEST_ID,TEST_NAME,AGE) VALUES (101,'MAHI',10)' at line 1
+mysql> INSERT INTO TABLE TEST2(TEST_ID,TEST_NAME,AGE) VALUES (101,'MAHI',10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE TEST2(TEST_ID,TEST_NAME,AGE) VALUES (101,'MAHI',10)' at line 1
+mysql> INSERT INTO TEST2 (TEST_ID, TEST_NAME, AGE) VALUES (101, 'MAHI', 10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT* FROM TEST2;
++---------+-----------+------+---------------------+
+| TEST_ID | TEST_NAME | AGE  | TEST_DATE           |
++---------+-----------+------+---------------------+
+|     101 | MAHI      |   10 | 2025-10-12 12:22:48 |
++---------+-----------+------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM S_INFO;
++------+-----------+------------+------+
+| S_ID | USER_NAME | DOB        | G_ID |
++------+-----------+------------+------+
+|  101 | NAHID     | 2020-01-01 |    1 |
++------+-----------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SG;
++------+--------+
+| G_ID | G_TYPE |
++------+--------+
+|    1 | MALE   |
+|    2 | MALE   |
+|    3 | FEMALE |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_I9) VALUES(102,'HABIB',2020-01-01,2);
+ERROR 1054 (42S22): Unknown column 'G_I9' in 'field list'
+mysql> INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES(102,'HABIB',2020-01-01,2);
+ERROR 1292 (22007): Incorrect date value: '2018' for column 'DOB' at row 1
+mysql> INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES(102,'HABIB',2021-03-01,2);
+ERROR 1292 (22007): Incorrect date value: '2017' for column 'DOB' at row 1
+mysql> ^C
+mysql> INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES
+    ->     ->   (101,'TUHIN','2020-01-01',3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->   (101,'TUHIN','2020-01-01',3)' at line 2
+mysql>  INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES
+    -> ^C
+mysql>  INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES  (101,'TUHIN','2020-01-01',3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  INSERT INTO S_INFO (S_ID, USER_NAME,DOB,G_ID) VALUES  (101,'TUHIN','2020-01-01',4);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`xyz_company`.`s_info`, CONSTRAINT `s_info_ibfk_1` FOREIGN KEY (`G_ID`) REFERENCES `sg` (`G_ID`))
+mysql> SELECT * FROM S_INFO;
++------+-----------+------------+------+
+| S_ID | USER_NAME | DOB        | G_ID |
++------+-----------+------------+------+
+|  101 | NAHID     | 2020-01-01 |    1 |
+|  101 | TUHIN     | 2020-01-01 |    3 |
++------+-----------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> NOTEE;
