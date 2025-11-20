@@ -1,0 +1,16 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| iit                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| university         |
+| world              |
+| xyz_company        |
++--------------------+
+9 rows in set (0.01 sec)
+

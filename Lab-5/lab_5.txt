@@ -1,0 +1,456 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| iit                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| university         |
+| world              |
+| xyz_company        |
++--------------------+
+9 rows in set (0.01 sec)
+
+mysql> use iit;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_iit |
++---------------+
+| a             |
+| depart        |
+| departments   |
+| student       |
+| students      |
++---------------+
+5 rows in set (0.01 sec)
+
+mysql> desc student;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| STUDENT_ID   | int          | YES  |     | NULL    |       |
+| STUDENT_NAME | varchar(70)  | YES  |     | NULL    |       |
+| SESSION      | varchar(10)  | YES  |     | NULL    |       |
+| CGPA         | float(5,2)   | YES  |     | NULL    |       |
+| GENDER       | varchar(7)   | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100) | YES  |     | NULL    |       |
+| DOB          | date         | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> alter table student 
+    -> add age;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> ALTER TABLE student
+    -> ADD age INT;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> desc student;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| STUDENT_ID   | int          | YES  |     | NULL    |       |
+| STUDENT_NAME | varchar(70)  | YES  |     | NULL    |       |
+| SESSION      | varchar(10)  | YES  |     | NULL    |       |
+| CGPA         | float(5,2)   | YES  |     | NULL    |       |
+| GENDER       | varchar(7)   | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100) | YES  |     | NULL    |       |
+| DOB          | date         | YES  |     | NULL    |       |
+| age          | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> update student 
+    -> set age=20;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select *from student;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM student;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO student (STUDENT_ID, STUDENT_NAME, SESSION, CGPA, GENDER, MOBILEPHONE, EMAIL, DOB, age)
+    -> VALUES
+    -> (1, 'Alice', '2025', 3.75, 'Female', '1234567890', 'alice@example.com', '2004-05-12', 21),
+    -> (2, 'Bob', '2025', 3.50, 'Male', '9876543210', 'bob@example.com', '2003-08-30', 22);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM student;
++------------+--------------+---------+------+--------+-------------+-------------------+------------+------+
+| STUDENT_ID | STUDENT_NAME | SESSION | CGPA | GENDER | MOBILEPHONE | EMAIL             | DOB        | age  |
++------------+--------------+---------+------+--------+-------------+-------------------+------------+------+
+|          1 | Alice        | 2025    | 3.75 | Female | 1234567890  | alice@example.com | 2004-05-12 |   21 |
+|          2 | Bob          | 2025    | 3.50 | Male   | 9876543210  | bob@example.com   | 2003-08-30 |   22 |
++------------+--------------+---------+------+--------+-------------+-------------------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student column email;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column email' at line 1
+mysql> alter table student column email;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column email' at line 1
+mysql>  alter table student column email;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' alter table student column email' at line 1
+mysql>  alter table drop student column email;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'drop student column email' at line 1
+mysql> ALTER TABLE student
+    -> DROP COLUMN EMAIL;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> seSELECT * FROM student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seSELECT * FROM student' at line 1
+mysql> SELECT * FROM student;
++------------+--------------+---------+------+--------+-------------+------------+------+
+| STUDENT_ID | STUDENT_NAME | SESSION | CGPA | GENDER | MOBILEPHONE | DOB        | age  |
++------------+--------------+---------+------+--------+-------------+------------+------+
+|          1 | Alice        | 2025    | 3.75 | Female | 1234567890  | 2004-05-12 |   21 |
+|          2 | Bob          | 2025    | 3.50 | Male   | 9876543210  | 2003-08-30 |   22 |
++------------+--------------+---------+------+--------+-------------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> desc student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| STUDENT_ID   | int         | YES  |     | NULL    |       |
+| STUDENT_NAME | varchar(70) | YES  |     | NULL    |       |
+| SESSION      | varchar(10) | YES  |     | NULL    |       |
+| CGPA         | float(5,2)  | YES  |     | NULL    |       |
+| GENDER       | varchar(7)  | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15) | YES  |     | NULL    |       |
+| DOB          | date        | YES  |     | NULL    |       |
+| age          | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table student add constraint pk_student_id primary key(student_id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  desc student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| STUDENT_ID   | int         | NO   | PRI | NULL    |       |
+| STUDENT_NAME | varchar(70) | YES  |     | NULL    |       |
+| SESSION      | varchar(10) | YES  |     | NULL    |       |
+| CGPA         | float(5,2)  | YES  |     | NULL    |       |
+| GENDER       | varchar(7)  | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15) | YES  |     | NULL    |       |
+| DOB          | date        | YES  |     | NULL    |       |
+| age          | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_iit |
++---------------+
+| a             |
+| depart        |
+| departments   |
+| student       |
+| students      |
++---------------+
+5 rows in set (0.00 sec)
+
+mysql> desc
+    -> students;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| student_id | int          | NO   | PRI | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| email      | varchar(100) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table employee(
+    -> employee_id int,
+    -> empolyee_name varchar(33);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql>  create table employee(
+    ->  employee_id int,
+    -> empolyee_name varchar(33)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into employee values(122,'ahda');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(122,'habib');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee;
++-------------+---------------+
+| employee_id | empolyee_name |
++-------------+---------------+
+|         122 | ahda          |
+|         122 | habib         |
++-------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table employee add constraint pk_employee_id primary key(employee_id);
+ERROR 1062 (23000): Duplicate entry '122' for key 'employee.PRIMARY'
+mysql> UPDATE employee
+    -> SET employee_id = 123
+    -> WHERE some_other_column = 'specific_value';
+ERROR 1054 (42S22): Unknown column 'some_other_column' in 'where clause'
+mysql> DELETE FROM employee
+    -> WHERE employee_id = 122
+    -> LIMIT 1;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++-------------+---------------+
+| employee_id | empolyee_name |
++-------------+---------------+
+|         122 | habib         |
++-------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> alter table employee add constraint pk_employee_id primary key(employee_id);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | int         | NO   | PRI | NULL    |       |
+| empolyee_name | varchar(33) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table add column student_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add column student_id' at line 1
+mysql>  alter table add employee column student_id int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add employee column student_id int' at line 1
+mysql> ALTER TABLE employee
+    -> ADD COLUMN student_id INT;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | int         | NO   | PRI | NULL    |       |
+| empolyee_name | varchar(33) | YES  |     | NULL    |       |
+| student_id    | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employee 
+    -> add constraint fk_student_id
+    -> foreign key(student_id)
+    -> references student(student_id);
+Query OK, 1 row affected (0.21 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | int         | NO   | PRI | NULL    |       |
+| empolyee_name | varchar(33) | YES  |     | NULL    |       |
+| student_id    | int         | YES  | MUL | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update employee set s
+    -> ^C
+mysql> update employee set student_id=104 where employee_id =122;
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`iit`.`employee`, CONSTRAINT `fk_student_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`STUDENT_ID`))
+mysql> mysql> update employee set student_id=1 where employee_id =122;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> update employee set student_id=1 where employee_id =122' at line 1
+mysql> INSERT INTO student (STUDENT_ID, name) VALUES (104, 'nahid');
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> UPDATE employee SET student_id=1 WHERE employee_id=122;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++-------------+---------------+------------+
+| employee_id | empolyee_name | student_id |
++-------------+---------------+------------+
+|         122 | habib         |          1 |
++-------------+---------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student;
++------------+--------------+---------+------+--------+-------------+------------+------+
+| STUDENT_ID | STUDENT_NAME | SESSION | CGPA | GENDER | MOBILEPHONE | DOB        | age  |
++------------+--------------+---------+------+--------+-------------+------------+------+
+|          1 | Alice        | 2025    | 3.75 | Female | 1234567890  | 2004-05-12 |   21 |
+|          2 | Bob          | 2025    | 3.50 | Male   | 9876543210  | 2003-08-30 |   22 |
++------------+--------------+---------+------+--------+-------------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE employee
+    -> add column student_course int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO employee (employee_id, empolyee_name, student_id, student_course)
+    -> VALUES (123, 'Nahid', 2, 1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++-------------+---------------+------------+----------------+
+| employee_id | empolyee_name | student_id | student_course |
++-------------+---------------+------------+----------------+
+|         122 | habib         |          1 |           NULL |
+|         123 | Nahid         |          2 |              1 |
++-------------+---------------+------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> desc student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| STUDENT_ID   | int         | NO   | PRI | NULL    |       |
+| STUDENT_NAME | varchar(70) | YES  |     | NULL    |       |
+| SESSION      | varchar(10) | YES  |     | NULL    |       |
+| CGPA         | float(5,2)  | YES  |     | NULL    |       |
+| GENDER       | varchar(7)  | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15) | YES  |     | NULL    |       |
+| DOB          | date        | YES  |     | NULL    |       |
+| age          | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> alter table student add constraint pk_aja primary key(session,age);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> ALTER TABLE student
+    -> DROP PRIMARY KEY,
+    -> ADD CONSTRAINT pk_aja PRIMARY KEY (session, age);
+ERROR 1553 (HY000): Cannot drop index 'PRIMARY': needed in a foreign key constraint
+mysql> ALTER TABLE student
+    -> DROP PRIMARY KEY;
+ERROR 1553 (HY000): Cannot drop index 'PRIMARY': needed in a foreign key constraint
+mysql> show tables;
++---------------+
+| Tables_in_iit |
++---------------+
+| a             |
+| depart        |
+| departments   |
+| employee      |
+| student       |
+| students      |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-------------+---------------+------------+----------------+
+| employee_id | empolyee_name | student_id | student_course |
++-------------+---------------+------------+----------------+
+|         122 | habib         |          1 |           NULL |
+|         123 | Nahid         |          2 |              1 |
++-------------+---------------+------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select employee_id,employee_name,student_name,cgpa,from student,employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from student,employee' at line 1
+mysql>  select employee_id,employee_name,student_name,cgpa from student,employee;
+ERROR 1054 (42S22): Unknown column 'employee_name' in 'field list'
+mysql> SELECT e.employee_id, e.empolyee_name, s.STUDENT_NAME, s.CGPA
+    -> FROM employee e
+    -> JOIN student s ON e.student_id = s.STUDENT_ID;
++-------------+---------------+--------------+------+
+| employee_id | empolyee_name | STUDENT_NAME | CGPA |
++-------------+---------------+--------------+------+
+|         122 | habib         | Alice        | 3.75 |
+|         123 | Nahid         | Bob          | 3.50 |
++-------------+---------------+--------------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT e.employee_id, e.empolyee_name, s.STUDENT_NAME, s.CGPA
+    -> FROM employee e, student s;
++-------------+---------------+--------------+------+
+| employee_id | empolyee_name | STUDENT_NAME | CGPA |
++-------------+---------------+--------------+------+
+|         123 | Nahid         | Alice        | 3.75 |
+|         122 | habib         | Alice        | 3.75 |
+|         123 | Nahid         | Bob          | 3.50 |
+|         122 | habib         | Bob          | 3.50 |
++-------------+---------------+--------------+------+
+4 rows in set (0.00 sec)
+
+mysql> desc a;
++------------+------+------+-----+---------+-------+
+| Field      | Type | Null | Key | Default | Extra |
++------------+------+------+-----+---------+-------+
+| student_id | int  | NO   | PRI | NULL    |       |
+| course_id  | int  | NO   | PRI | NULL    |       |
+| date_time  | date | YES  |     | NULL    |       |
++------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from a;
+Empty set (0.01 sec)
+
+mysql> select *from student;
++------------+--------------+---------+------+--------+-------------+------------+------+
+| STUDENT_ID | STUDENT_NAME | SESSION | CGPA | GENDER | MOBILEPHONE | DOB        | age  |
++------------+--------------+---------+------+--------+-------------+------------+------+
+|          1 | Alice        | 2025    | 3.75 | Female | 1234567890  | 2004-05-12 |   21 |
+|          2 | Bob          | 2025    | 3.50 | Male   | 9876543210  | 2003-08-30 |   22 |
++------------+--------------+---------+------+--------+-------------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select *from students;
++------------+-------+--------------------+
+| student_id | name  | email              |
++------------+-------+--------------------+
+|          1 | HABIB | NAHIADUL@GMAIL.COM |
+|          2 | HABIB | NAHIADUL@GMAIL.COM |
+|          3 | AHAD  | TASHI@GAMIL.COM    |
+|          4 | SHAON | NIGGA@GMAIL.COM    |
++------------+-------+--------------------+
+4 rows in set (0.01 sec)
+
+mysql>  select *from depertment;
+ERROR 1146 (42S02): Table 'iit.depertment' doesn't exist
+mysql>  select *from departments;
++---------------+-------------------------+
+| department_id | department_name         |
++---------------+-------------------------+
+|             1 | Computer Science        |
+|             2 | Business Administration |
++---------------+-------------------------+
+2 rows in set (0.01 sec)
+
+mysql> select e.student_id,e.name,e.email,d.department_id,d.department_name 
+    -> from students s,department d
+    -> ;
+ERROR 1146 (42S02): Table 'iit.department' doesn't exist
+mysql> SELECT s.student_id, s.name, s.email, d.department_id, d.department_name
+    -> FROM students s, departments d
+    -> WHERE s.student_id = d.department_id;
++------------+-------+--------------------+---------------+-------------------------+
+| student_id | name  | email              | department_id | department_name         |
++------------+-------+--------------------+---------------+-------------------------+
+|          1 | HABIB | NAHIADUL@GMAIL.COM |             1 | Computer Science        |
+|          2 | HABIB | NAHIADUL@GMAIL.COM |             2 | Business Administration |
++------------+-------+--------------------+---------------+-------------------------+
+2 rows in set (0.00 sec)
+
+mysql> notee;

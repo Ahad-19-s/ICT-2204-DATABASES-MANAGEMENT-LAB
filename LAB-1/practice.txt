@@ -1,0 +1,138 @@
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| ict_14             |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> create database database_management_lab;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases
+    -> ;
++-------------------------+
+| Database                |
++-------------------------+
+| ahad                    |
+| company_xyz             |
+| database_management_lab |
+| ict_14                  |
+| iit1                    |
+| iit14                   |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sabina                  |
+| sakila                  |
+| school                  |
+| sys                     |
+| world                   |
++-------------------------+
+14 rows in set (0.00 sec)
+
+mysql> use database_management_lab;
+Database changed
+mysql> drop database database_management_lab;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| ict_14             |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> create database Ict_14;
+ERROR 1007 (HY000): Can't create database 'ict_14'; database exists
+mysql> create database ict_14;
+ERROR 1007 (HY000): Can't create database 'ict_14'; database exists
+mysql> use ict_14;
+Database changed
+mysql> desc ict_14;
+ERROR 1146 (42S02): Table 'ict_14.ict_14' doesn't exist
+mysql> desc ict_14;
+ERROR 1146 (42S02): Table 'ict_14.ict_14' doesn't exist
+mysql> ^C
+mysql> show tables;
++------------------+
+| Tables_in_ict_14 |
++------------------+
+| course           |
+| employee         |
+| hall             |
+| teacher          |
++------------------+
+4 rows in set (0.00 sec)
+
+mysql> desc course;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| COURSE_ID     | int         | YES  |     | NULL    |       |
+| COURSE_CODE   | int         | NO   | PRI | NULL    |       |
+| COURSE_NAME   | varchar(68) | YES  |     | NULL    |       |
+| SEMESTER_NAME | varchar(50) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table staf(
+    -> staf_id int,
+    -> staf_name varchar(50),
+    -> staf_age int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql>  create table staf(
+    ->  staf_id int,
+    -> staf_name varchar(50),
+    -> staf_age int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_ict_14 |
++------------------+
+| course           |
+| employee         |
+| hall             |
+| staf             |
+| teacher          |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> desc staf;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| staf_id   | int         | YES  |     | NULL    |       |
+| staf_name | varchar(50) | YES  |     | NULL    |       |
+| staf_age  | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

@@ -1,0 +1,15 @@
+mysql> tee D:\1986\MySql\2204-Databases Management Lab\LAB-1\practice.txt;
+ERROR: 
+Unknown command '\1'.
+ERROR: 
+Unknown command '\M'.
+ERROR: 
+Unknown command '\2'.
+ERROR: 
+Unknown command '\L'.
+--------------
+tee D:\1986\MySql\2204-Databases Management Lab\LAB-1
+--------------
+
+mysql> tee "D:\1986\MySql\2204-Databases Management Lab\LAB-1\practice.txt";
+mysql> tee "D:/1986/MySql/2204-Databases Management Lab/LAB-1/practice.txt"

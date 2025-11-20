@@ -1,0 +1,263 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| ict_14             |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use ict_14;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_ict_14 |
++------------------+
+| course           |
+| employee         |
+| hall             |
+| staf             |
+| teacher          |
++------------------+
+5 rows in set (0.03 sec)
+
+mysql> create table student(
+    -> id int unique,
+    -> name varchar(30),
+    -> age tinyint,
+    -> semister varchar(5)
+    -> );
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | YES  | UNI | NULL    |       |
+| name     | varchar(30) | YES  |     | NULL    |       |
+| age      | tinyint     | YES  |     | NULL    |       |
+| semister | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table student
+    -> modify column name primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key' at line 2
+mysql> ALTER TABLE student
+    -> ADD PRIMARY KEY (name);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | YES  | UNI | NULL    |       |
+| name     | varchar(30) | NO   | PRI | NULL    |       |
+| age      | tinyint     | YES  |     | NULL    |       |
+| semister | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>  ALTER TABLE student
+    -> add primary key(semister);
+ERROR 1068 (42000): Multiple primary key defined
+mysql>  ALTER TABLE student 
+    -> add unique (semister);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create table Empoiyee(
+    -> Employee_id int not null,
+    -> employee_code int primary key,
+    -> employee_name varchar(40),
+    -> deprtment_id int,
+    -> branch_id int );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc table empoiyee;
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table    | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | empoiyee | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |   100.00 | NULL  |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.01 sec)
+
+mysql> desc Empoiyee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| Employee_id   | int         | NO   |     | NULL    |       |
+| employee_code | int         | NO   | PRI | NULL    |       |
+| employee_name | varchar(40) | YES  |     | NULL    |       |
+| deprtment_id  | int         | YES  |     | NULL    |       |
+| branch_id     | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table Empoiyee
+    -> add not null(Employee_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null(Employee_id)' at line 2
+mysql> ALTER TABLE Empoiyee
+    -> MODIFY COLUMN Employee_id INT NOT NULL;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Empoiyee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| Employee_id   | int         | NO   |     | NULL    |       |
+| employee_code | int         | NO   | PRI | NULL    |       |
+| employee_name | varchar(40) | YES  |     | NULL    |       |
+| deprtment_id  | int         | YES  |     | NULL    |       |
+| branch_id     | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>  ALTER TABLE Empoiyee
+    -> > MODIFY COLUMN branch_id int not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> MODIFY COLUMN branch_id int not null' at line 2
+mysql>  ALTER TABLE Empoiyee
+    -> ^C
+mysql>  ALTER TABLE Empoiyee
+    -> MODIFY COLUMN branch_id int not null;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Empoiyee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| Employee_id   | int         | NO   |     | NULL    |       |
+| employee_code | int         | NO   | PRI | NULL    |       |
+| employee_name | varchar(40) | YES  |     | NULL    |       |
+| deprtment_id  | int         | YES  |     | NULL    |       |
+| branch_id     | int         | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table department(
+    ->  department_id int unique,
+    ->  department_code tinyint,
+    ->  department_name varchar(87)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> 
+mysql> desc deprtment;
+ERROR 1146 (42S02): Table 'ict_14.deprtment' doesn't exist
+mysql> desc  department;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| department_id   | int         | YES  | UNI | NULL    |       |
+| department_code | tinyint     | YES  |     | NULL    |       |
+| department_name | varchar(87) | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table branch(
+    -> branch_id int primary key,
+    -> branch_code int,
+    -> branch_name varchar(47)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc branch;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| branch_id   | int         | NO   | PRI | NULL    |       |
+| branch_code | int         | YES  |     | NULL    |       |
+| branch_name | varchar(47) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_ict_14 |
++------------------+
+| branch           |
+| course           |
+| department       |
+| employee         |
+| empoiyee         |
+| hall             |
+| staf             |
+| student          |
+| teacher          |
++------------------+
+9 rows in set (0.00 sec)
+
+mysql> desc course;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| COURSE_ID     | int         | YES  |     | NULL    |       |
+| COURSE_CODE   | int         | NO   | PRI | NULL    |       |
+| COURSE_NAME   | varchar(68) | YES  |     | NULL    |       |
+| SEMESTER_NAME | varchar(50) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop course;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'course' at line 1
+mysql> drop table course;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_ict_14 |
++------------------+
+| branch           |
+| department       |
+| employee         |
+| empoiyee         |
+| hall             |
+| staf             |
+| student          |
+| teacher          |
++------------------+
+8 rows in set (0.00 sec)
+
+mysql> create table course(
+    -> course_id int,
+    -> course_code int,
+    -> course_name varchar(787),
+    -> primary key(course_id,course_code)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc course
+    -> ;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| course_id   | int          | NO   | PRI | NULL    |       |
+| course_code | int          | NO   | PRI | NULL    |       |
+| course_name | varchar(787) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table customer(
+    -> customer_id int primary key,
+    -> customer_code int unique,
+    -> customer_name varchar(36),
+    -> branch_id int,
+    -> foreign key (branch_id) references branch(branch_id)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> notee;

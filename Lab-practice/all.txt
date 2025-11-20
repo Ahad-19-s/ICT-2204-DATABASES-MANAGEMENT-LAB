@@ -1,0 +1,324 @@
+mysql> create database ict;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| ict                |
+| ict_14             |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+14 rows in set (0.04 sec)
+
+mysql> use ict_14;
+Database changed
+mysql> use ict;
+Database changed
+mysql> hello world;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hello world' at line 1
+mysql> create table hall(
+    -> id int,
+    -> name varchar(28)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_ict |
++---------------+
+| hall          |
++---------------+
+1 row in set (0.02 sec)
+
+mysql> desc hall;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(28) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> create table student(
+    -> name varchar(38),
+    -> id int not null,
+    -> age tinyint);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table course(
+    -> name varchar(88),
+    -> id int unique,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 4
+mysql> create table course(
+    ->  id int unique,
+    -> name varchar(88));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CREATE TABLE STUDENTS(
+    -> STUDENT_ID INT,
+    -> SEMESTER VARCHAR (5),
+    -> constraint u_id unique( STUDENT_ID)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> drop students;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'students' at line 1
+mysql> CREATE TABLE STUDENT (
+    -> STUDENT_ID INT,
+    -> STUDENT_CODE VARCHAR (20),
+    -> STUDENT_NAME VARCHAR (30),
+    -> STUDENT_AGE TINYINT,
+    -> SEMESTER VARCHAR (5),
+    -> PRIMARY KEY (STUDENT_ID, STUDENT_CODE)
+    -> );
+ERROR 1050 (42S01): Table 'student' already exists
+mysql> drop table student;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE STUDENT (
+    -> STUDENT_ID INT,
+    -> STUDENT_CODE VARCHAR (20),
+    -> STUDENT_NAME VARCHAR (30),
+    -> STUDENT_AGE TINYINT,
+    -> SEMESTER VARCHAR (5),
+    -> PRIMARY KEY (STUDENT_ID, STUDENT_CODE)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> drop table hall;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE HALL(
+    -> 
+    -> HALL_ID INT PRIMARY KEY,
+    -> HALL_NAME VARCHAR (30),
+    -> STUDENT_I INT,
+    -> FOREIGN KEY (STUDENT_I) REFERENCES STUDENT (STUDENT_ID));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> create branch(
+    -> id int primary key);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'branch(
+id int primary key)' at line 1
+mysql> create table branch(
+    ->  id int primary key);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table coustmer(
+    -> c_id int,
+    -> code int,
+    -> name varchar(90),
+    -> branch_id int,
+    -> primary key(c_id ,code),
+    -> foreign key(branch_id) references coustmer(id)
+    -> );
+ERROR 3734 (HY000): Failed to add the foreign key constraint. Missing column 'id' for constraint 'coustmer_ibfk_1' in the referenced table 'coustmer'
+mysql> create table coustmer(
+    ->  c_id int,
+    ->  name varchar(90),
+    ->  branch_id int,
+    ->  primary key(c_id ,code),
+    -> foreign key(branch_id) references branch(id)
+    -> );
+ERROR 1072 (42000): Key column 'code' doesn't exist in table
+mysql>  create table coustmer(
+    ->  c_id int,
+    ->  code int,
+    -> branch_id int,
+    -> primary key(c_id ,code),
+    -> foreign key(branch_id) references branch(id)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc coustmer;
++-----------+------+------+-----+---------+-------+
+| Field     | Type | Null | Key | Default | Extra |
++-----------+------+------+-----+---------+-------+
+| c_id      | int  | NO   | PRI | NULL    |       |
+| code      | int  | NO   | PRI | NULL    |       |
+| branch_id | int  | YES  | MUL | NULL    |       |
++-----------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> use ict_14;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_ict_14 |
++------------------+
+| branch           |
+| course           |
+| customer         |
+| department       |
+| employee         |
+| empoiyee         |
+| hall             |
+| staf             |
+| student          |
+| teacher          |
++------------------+
+10 rows in set (0.00 sec)
+
+mysql> select *from branch;
+Empty set (0.04 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| ict                |
+| ict_14             |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+14 rows in set (0.00 sec)
+
+mysql> use iit14;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_iit14 |
++-----------------+
+| composite_key   |
+| departments     |
+| student         |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student;
++------------+---------------+------+--------+-------------+-------------------+------------+
+| STUDENT_ID | STUDENT_NAME  | CGPA | GENDER | MOBILEPHONE | EMAIL             | DOB        |
++------------+---------------+------+--------+-------------+-------------------+------------+
+|          1 | Ahad Ahmed    | 3.75 | Male   | 01712345678 | ahad@example.com  | 2000-05-12 |
+|          2 | Sara Khan     | 3.90 | Female | 01898765432 | sara@example.com  | 2001-08-23 |
+|          3 | Rasel Hossain | 3.50 | Male   | 01911223344 | rasel@example.com | 1999-11-05 |
++------------+---------------+------+--------+-------------+-------------------+------------+
+3 rows in set (0.03 sec)
+
+mysql> truncate table student;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select *from student;
+Empty set (0.00 sec)
+
+mysql> desc  student;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| STUDENT_ID   | int          | YES  |     | NULL    |       |
+| STUDENT_NAME | varchar(20)  | YES  |     | NULL    |       |
+| CGPA         | float(5,2)   | YES  |     | NULL    |       |
+| GENDER       | varchar(7)   | YES  |     | NULL    |       |
+| MOBILEPHONE  | varchar(15)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100) | YES  |     | NULL    |       |
+| DOB          | date         | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> insert into student(
+    -> student_id,student_name,cgpa,gender) values
+    -> (1,'ahad',3.6,male)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 4
+mysql> student_id,student_name,cgpa,gender) values
+    -> (1,'ahad',3.6,male)
+    -> ^C
+mysql>  student_id,student_name,cgpa,gender) values
+    -> (1,'ahad',3.6,'male')
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student_id,student_name,cgpa,gender) values
+(1,'ahad',3.6,'male')
+)' at line 1
+mysql> INSERT INTO student (student_id, student_name, cgpa, gender)
+    -> VALUES (1, 'ahad', 3.6, 'male');
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  INSERT INTO student (student_id, student_name, cgpa, gender)
+    ->  VALUES (2, 'sabina', 3.6, 'male');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select *from student;
++------------+--------------+------+--------+-------------+-------+------+
+| STUDENT_ID | STUDENT_NAME | CGPA | GENDER | MOBILEPHONE | EMAIL | DOB  |
++------------+--------------+------+--------+-------------+-------+------+
+|          1 | ahad         | 3.60 | male   | NULL        | NULL  | NULL |
+|          2 | sabina       | 3.60 | male   | NULL        | NULL  | NULL |
++------------+--------------+------+--------+-------------+-------+------+
+2 rows in set (0.00 sec)
+
+mysql> delete from student where student_id=1;
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  select *from student;
++------------+--------------+------+--------+-------------+-------+------+
+| STUDENT_ID | STUDENT_NAME | CGPA | GENDER | MOBILEPHONE | EMAIL | DOB  |
++------------+--------------+------+--------+-------------+-------+------+
+|          2 | sabina       | 3.60 | male   | NULL        | NULL  | NULL |
++------------+--------------+------+--------+-------------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT order_id, product_name, qty 
+    -> FROM orders 
+    -> INTO OUTFILE '/tmp/orders.txt';
+ERROR 1146 (42S02): Table 'iit14.orders' doesn't exist
+mysql> CREATE TABLE orders (
+    ->     order_id INT,
+    ->     product_name VARCHAR(100),
+    ->     qty INT
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO orders VALUES
+    -> (1, 'Pen', 10),
+    -> (2, 'Notebook', 5),
+    -> (3, 'Pencil', 20);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT order_id, product_name, qty
+    -> FROM orders
+    -> INTO OUTFILE '/tmp/orders.txt';
+ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement
+mysql> SELECT order_id, product_name, qty
+    -> FROM orders
+    -> INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/orders.txt';
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> update orders set product_name='rul' where order_id=3;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from orders;
++----------+--------------+------+
+| order_id | product_name | qty  |
++----------+--------------+------+
+|        1 | Pen          |   10 |
+|        2 | Notebook     |    5 |
+|        3 | rul          |   20 |
++----------+--------------+------+
+3 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

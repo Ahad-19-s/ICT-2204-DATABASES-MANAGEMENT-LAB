@@ -1,0 +1,289 @@
+mysql> tee D:\\1986\\MySql\\2204-Databases Management Lab\\Lab-5\\lab.txt;
+ERROR: 
+Unknown command '\\'.
+ERROR: 
+Unknown command '\\'.
+ERROR: 
+Unknown command '\\'.
+ERROR: 
+Unknown command '\\'.
+ERROR: 
+Unknown command '\\'.
+mysql> tee D:/1986/MySql/2204-Databases Management Lab/Lab-5/lab.txt;
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| ict_14             |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+13 rows in set (0.15 sec)
+
+mysql> use ict_14;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_ict_14 |
++------------------+
+| branch           |
+| course           |
+| customer         |
+| department       |
+| employee         |
+| empoiyee         |
+| hall             |
+| staf             |
+| student          |
+| teacher          |
++------------------+
+10 rows in set (0.03 sec)
+
+mysql> select *from course;
+Empty set (0.06 sec)
+
+mysql> desc course;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| course_id   | int          | NO   | PRI | NULL    |       |
+| course_code | int          | NO   | PRI | NULL    |       |
+| course_name | varchar(787) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into course(course_id,course_code,course_name)
+    -> values
+    -> (1,101,'database management system'),
+    -> (2,102,'algorithm analaysis degin'),
+    -> (3,103,'accounting');
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from course;
++-----------+-------------+----------------------------+
+| course_id | course_code | course_name                |
++-----------+-------------+----------------------------+
+|         1 |         101 | database management system |
+|         2 |         102 | algorithm analaysis degin  |
+|         3 |         103 | accounting                 |
++-----------+-------------+----------------------------+
+3 rows in set (0.01 sec)
+
+mysql> select course_name
+    -> from course
+    -> where course_id =102;
+Empty set (0.01 sec)
+
+mysql>  select course_name
+    -> from course
+    ->  where course_id =2;
++---------------------------+
+| course_name               |
++---------------------------+
+| algorithm analaysis degin |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select course_id from course;
++-----------+
+| course_id |
++-----------+
+|         1 |
+|         2 |
+|         3 |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select course_name from course;
++----------------------------+
+| course_name                |
++----------------------------+
+| database management system |
+| algorithm analaysis degin  |
+| accounting                 |
++----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc hall;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| HALL_ID   | int         | NO   | PRI | NULL    |       |
+| HALL_CODE | int         | YES  |     | NULL    |       |
+| HALL_NAME | varchar(48) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | YES  | UNI | NULL    |       |
+| name     | varchar(30) | NO   | PRI | NULL    |       |
+| age      | tinyint     | YES  |     | NULL    |       |
+| semister | varchar(5)  | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select* from student;
+Empty set (0.03 sec)
+
+mysql> insert into student (id,name,age,semister)
+    -> values
+    -> (1986,'Ahad Ahmed',21,'2nd');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select id,name, course_id,course_name from student,course;
++------+------------+-----------+----------------------------+
+| id   | name       | course_id | course_name                |
++------+------------+-----------+----------------------------+
+| 1986 | Ahad Ahmed |         1 | database management system |
+| 1986 | Ahad Ahmed |         2 | algorithm analaysis degin  |
+| 1986 | Ahad Ahmed |         3 | accounting                 |
++------+------------+-----------+----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select course_name ,course_id 
+    -> from course
+    -> limit 2;
++----------------------------+-----------+
+| course_name                | course_id |
++----------------------------+-----------+
+| database management system |         1 |
+| algorithm analaysis degin  |         2 |
++----------------------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into student(id,name)
+    -> select course_id,course_name
+    -> from course;
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++------+----------------------------+------+----------+
+| id   | name                       | age  | semister |
++------+----------------------------+------+----------+
+|    3 | accounting                 | NULL | NULL     |
+| 1986 | Ahad Ahmed                 |   21 | 2nd      |
+|    2 | algorithm analaysis degin  | NULL | NULL     |
+|    1 | database management system | NULL | NULL     |
++------+----------------------------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql>  select *from student 
+    -> where id = 1986;
++------+------------+------+----------+
+| id   | name       | age  | semister |
++------+------------+------+----------+
+| 1986 | Ahad Ahmed |   21 | 2nd      |
++------+------------+------+----------+
+1 row in set (0.00 sec)
+
+mysql> select id, name from student
+    -> union 
+    -> select course_id, course_name from hall;
+ERROR 1054 (42S22): Unknown column 'course_id' in 'field list'
+mysql>  select id, name from student
+    ->  union
+    ->  select course_id, course_name from course;
++------+----------------------------+
+| id   | name                       |
++------+----------------------------+
+|    1 | database management system |
+|    2 | algorithm analaysis degin  |
+|    3 | accounting                 |
+| 1986 | Ahad Ahmed                 |
++------+----------------------------+
+4 rows in set (0.01 sec)
+
+mysql>  select id, name from student
+    ->  union all
+    ->  select course_id, course_name from course;
++------+----------------------------+
+| id   | name                       |
++------+----------------------------+
+|    1 | database management system |
+|    2 | algorithm analaysis degin  |
+|    3 | accounting                 |
+| 1986 | Ahad Ahmed                 |
+|    1 | database management system |
+|    2 | algorithm analaysis degin  |
+|    3 | accounting                 |
++------+----------------------------+
+7 rows in set (0.00 sec)
+
+mysql> desc course;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| course_id   | int          | NO   | PRI | NULL    |       |
+| course_code | int          | NO   | PRI | NULL    |       |
+| course_name | varchar(787) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc hall;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| HALL_ID   | int         | NO   | PRI | NULL    |       |
+| HALL_CODE | int         | YES  |     | NULL    |       |
+| HALL_NAME | varchar(48) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table hall drop primary key;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| HALL_ID   | int         | NO   |     | NULL    |       |
+| HALL_CODE | int         | YES  |     | NULL    |       |
+| HALL_NAME | varchar(48) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table hall add constraint pk_id_code primary key(hall_code);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| HALL_ID   | int         | NO   |     | NULL    |       |
+| HALL_CODE | int         | NO   | PRI | NULL    |       |
+| HALL_NAME | varchar(48) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table hall add column hall_provost varchar(28);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| HALL_ID      | int         | NO   |     | NULL    |       |
+| HALL_CODE    | int         | NO   | PRI | NULL    |       |
+| HALL_NAME    | varchar(48) | YES  |     | NULL    |       |
+| hall_provost | varchar(28) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+

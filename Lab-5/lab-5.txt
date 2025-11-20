@@ -1,0 +1,11 @@
+mysql>  tee D:\1986\MySql\2204-Databases Management Lab\Lab-5\lab.txt;
+ERROR: 
+Unknown command '\1'.
+ERROR: 
+Unknown command '\M'.
+ERROR: 
+Unknown command '\2'.
+ERROR: 
+Unknown command '\L'.
+ERROR: 
+Unknown command '\l'.

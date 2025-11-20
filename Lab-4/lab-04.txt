@@ -1,0 +1,354 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ahad               |
+| company_xyz        |
+| ict                |
+| ict_14             |
+| iit1               |
+| iit14              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sabina             |
+| sakila             |
+| school             |
+| sys                |
+| world              |
++--------------------+
+14 rows in set (0.08 sec)
+
+mysql> create database lab4;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use lab4;
+Database changed
+mysql> 
+mysql> 
+mysql> show tables;
+Empty set (0.03 sec)
+
+mysql> create table student(
+    -> id int,
+    -> name varchar(89),
+    -> age int,
+    -> phone int
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create table hall(
+    -> id int,
+    -> name varchar(78)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table course(
+    -> id int ,
+    -> code int,
+    -> name varchar(47)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> alter table hall add phone int;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(78) | YES  |     | NULL    |       |
+| phone | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter table hall drop phone;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(78) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc course;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| code  | int         | YES  |     | NULL    |       |
+| name  | varchar(47) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table course add provost;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table course add provost int;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc course;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | YES  |     | NULL    |       |
+| code    | int         | YES  |     | NULL    |       |
+| name    | varchar(47) | YES  |     | NULL    |       |
+| provost | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table course drop id,provost;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'provost' at line 1
+mysql> alter table course drop id,drop provost;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(89) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| phone | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student add constraint pk primary key(id);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(89) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| phone | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table course add constraint pk primary key(id);
+ERROR 1072 (42000): Key column 'id' doesn't exist in table
+mysql> desc course;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| code  | int         | YES  |     | NULL    |       |
+| name  | varchar(47) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table course add id int;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc course;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| code  | int         | YES  |     | NULL    |       |
+| name  | varchar(47) | YES  |     | NULL    |       |
+| id    | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table course add constraint pk primary key(id);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(89) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| phone | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc course;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| code  | int         | YES  |     | NULL    |       |
+| name  | varchar(47) | YES  |     | NULL    |       |
+| id    | int         | NO   | PRI | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table hall add constraint pk primary key(id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(78) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student add course_id,hall_id,constraint fk_c foreign key(course_id) references course(id),constraint fk_h foreign key(hall_id) references hall(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',hall_id,constraint fk_c foreign key(course_id) references course(id),constraint' at line 1
+mysql> alter table student add course_id,add hall_id, add constraint fk_c foreign key(course_id) references course(id),add constraint fk_h foreign key(hall_id) references hall(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',add hall_id, add constraint fk_c foreign key(course_id) references course(id),a' at line 1
+mysql> ^C
+mysql> ^C
+mysql> ^C
+mysql> alter table student add course_id int,add hall_id int,add constraint fk_c foreign key(course_id) references course(id),add constraint fk_h foreign key(hall_id) references hall(id);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | NO   | PRI | NULL    |       |
+| name      | varchar(89) | YES  |     | NULL    |       |
+| age       | int         | YES  |     | NULL    |       |
+| phone     | int         | YES  |     | NULL    |       |
+| course_id | int         | YES  | MUL | NULL    |       |
+| hall_id   | int         | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> 
+mysql> alter table hall add hall_clearance varchar(56);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| id             | int         | NO   | PRI | NULL    |       |
+| name           | varchar(78) | YES  |     | NULL    |       |
+| hall_clearance | varchar(56) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table hall modify column id int default 1;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| id             | int         | NO   | PRI | 1       |       |
+| name           | varchar(78) | YES  |     | NULL    |       |
+| hall_clearance | varchar(56) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student rename to student_info;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc student_info;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | NO   | PRI | NULL    |       |
+| name      | varchar(89) | YES  |     | NULL    |       |
+| age       | int         | YES  |     | NULL    |       |
+| phone     | int         | YES  |     | NULL    |       |
+| course_id | int         | YES  | MUL | NULL    |       |
+| hall_id   | int         | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table hall change column name hall_name varchar(787);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc hall;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| id             | int          | NO   | PRI | 1       |       |
+| hall_name      | varchar(787) | YES  |     | NULL    |       |
+| hall_clearance | varchar(56)  | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table enroll (
+    -> id int,
+    -> name varchar(87)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> alter table enroll add constraint primary key(id,name);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc enroll;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(87) | NO   | PRI | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table enroll drop primary key;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc enroll;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   |     | NULL    |       |
+| name  | varchar(87) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student_info drop foreign key fk_c,drop foreign key fk_h;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student_info;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | NO   | PRI | NULL    |       |
+| name      | varchar(89) | YES  |     | NULL    |       |
+| age       | int         | YES  |     | NULL    |       |
+| phone     | int         | YES  |     | NULL    |       |
+| course_id | int         | YES  | MUL | NULL    |       |
+| hall_id   | int         | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> show select table student ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select table student' at line 1
+mysql> SHOW CREATE TABLE student_info;
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table        | Create Table                                                                                                                                                                                                                                                                                                                                            |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| student_info | CREATE TABLE `student_info` (
+  `id` int NOT NULL,
+  `name` varchar(89) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `phone` int DEFAULT NULL,
+  `course_id` int DEFAULT NULL,
+  `hall_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_c` (`course_id`),
+  KEY `fk_h` (`hall_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> notee;
